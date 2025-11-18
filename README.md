@@ -21,11 +21,16 @@ zPolaron relies on the following packages:
     
 (2) Without specifying the residues to be redesigned, redesign all residues within 40 Å of the ligand based on the current sequence.
 
-    python run_design.py -r protein.pdb -l ligand.mol2 -c 40 -o out/design_out_all.txt
+    python run_design.py -r examples/protein.pdb -l examples/ligand.mol2 -c 40 -o out/design_out_all.txt
     
 ### 2. For scoring mutant sequences
 
 Mutate residue 107 of Chain A to T, residue 120 of Chain A to I, and residue 91 of Chain B to Y.
 
     python run_score.py -r protein.pdb -l ligand.mol2 -c 40 -t A_A107T,A_F120I,B_N91Y -o out/score_out.txt
-    
+
+## Citation
+To be updated
+
+## Contacts
+To be updated
