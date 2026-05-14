@@ -230,7 +230,7 @@ zPolaron achieves comparable average recovery to LigandMPNN on the LigandMPNN sm
 ### Zero-shot Fitness Prediction
 
 ![Zero-shot Scoring Correlation](images/fig3-compare-with-fep.png)
-**Figure 3**: Correlation between zero-shot scores and protein (primarily enzyme) mutational fitness. Results show zPolaron outperforms ProteinMPNN and LigandMPNN on 6 out of 7 targets in deep mutational scanning datasets.
+**Figure 3**: Zero-shot scoring performance of zPolaron compared with other inverse folding models. **Left**: Correlation with deep mutational scanning (DMS) data across 7 enzyme targets, where zPolaron outperforms ProteinMPNN and LigandMPNN on 6 out of 7 targets. **Right**: Correlation with binding free energy (FEP) calculations, where zPolaron maintains positive correlation on 5 out of 7 targets with >0.7 correlation on 2 targets.
 
 **Key findings:**
 - Across **7 deep mutational scanning targets**, zPolaron outperforms ProteinMPNN and LigandMPNN on **6 targets** in terms of zero-shot prediction correlation.
