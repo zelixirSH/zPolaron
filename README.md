@@ -1,6 +1,6 @@
 # zPolaron
 
-**Z**elixir's **P**rotein-sequence **O**ptimization using **L**igand-residue interacti**o**ns and evolutio**n**
+**Z**elixir's **P**rotein-sequence **O**ptimization using **L**igand-residue inter**a**cti**o**ns and evolutio**n**
 
 zPolaron (internal early version name: InterEvoMPNN) is a deep learning-based protein inverse folding model that focuses on the **functional pocket region** — the substrate-binding pocket and its surrounding structure — to directly achieve "function-guided" structure-to-sequence mapping. Unlike traditional global inverse folding approaches that maximize sequence recovery, zPolaron is designed for **high binding affinity and high catalytic activity** by precisely modeling the physicochemical micro-environment of the active site.
 
@@ -50,7 +50,7 @@ zPolaron addresses these limitations by:
 3. **Incorporating evolutionary information**: Using ESM2 large language model embeddings as residue features to capture evolutionary conservation.
 4. **Modeling diverse interactions**: Encoding specific interaction types (hydrophobic contacts, hydrogen bonds, π-π stacking, salt bridges, etc.) as edge features.
 
-![zPolaron Model Framework](images/fig1-zpolaron-model.png)
+![zPolaron Model Framework](images/fig1_zPolaron_model.png)
 **Figure 1**: Overall framework of the zPolaron model based on deep learning graph neural networks. The model takes a protein-ligand complex structure as input and outputs the probability distribution of 20 amino acids at each masked residue position.
 
 ---
@@ -147,7 +147,7 @@ For **redesigned residues**, all interaction edge features involving that residu
 
 5. **Iteration**: The message passing process is repeated **4 times**, after which the model outputs a probability distribution over 20 amino acid types for each masked position.
 
-![Sequence Recovery Performance](images/fig2-model-performance.png)
+![Sequence Recovery Performance](images/fig2_recovery.png)
 **Figure 2**: Sequence recovery rate of zPolaron compared with other methods. zPolaron achieves comparable mean recovery to LigandMPNN but with a wider distribution, which correlates with residue evolutionary conservation.
 
 ---
@@ -229,13 +229,11 @@ zPolaron achieves comparable average recovery to LigandMPNN on the LigandMPNN sm
 
 ### Zero-shot Fitness Prediction
 
-![Zero-shot Scoring Correlation](images/fig3-compare-with-fep.png)
-**Figure 3**: Zero-shot scoring performance of zPolaron compared with other inverse folding models. **Left**: Correlation with deep mutational scanning (DMS) data across 7 enzyme targets, where zPolaron outperforms ProteinMPNN and LigandMPNN on 6 out of 7 targets. **Right**: Correlation with binding free energy (FEP) calculations, where zPolaron maintains positive correlation on 5 out of 7 targets with >0.7 correlation on 2 targets.
+![Zero-shot Scoring Correlation](images/fig3_fitness_score.png)
+**Figure 3**: Zero-shot scoring performance of zPolaron compared with other inverse folding models on DMS dataset. 
 
-**Key findings:**
-- Across **7 deep mutational scanning targets**, zPolaron outperforms ProteinMPNN and LigandMPNN on **6 targets** in terms of zero-shot prediction correlation.
-- In **free energy perturbation (FEP)** datasets, LigandMPNN showed contradictory correlations on most targets. While CARBonA achieved >0.4 correlation on two systems, its correlation on most targets was unsatisfactory.
-- zPolaron maintains **positive correlation on 5 out of 7 FEP targets**, with **>0.7 correlation on 2 targets**, demonstrating stronger zero-shot scoring capability reflecting sequence-structure-function relationships.
+![Zero-shot Scoring Correlation Thermal Mutation](images/fig4_fitness_thermal_stability_pocket_mutation.png)
+**Figure 4**: Zero-shot scoring performance of zPolaron compared with other inverse folding models on S2648 ddG dataset and pocket disruption dataset. 
 
 ### P450 Enzyme Activity Prediction
 
