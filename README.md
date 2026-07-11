@@ -179,9 +179,6 @@ This strategy avoids error accumulation (only high-confidence residues are locke
 
 The attention cross-message-passing layer first projects edge features to the same dimension as node hidden states, then concatenates them with source and target node features. Multi-head attention (4 heads) assigns importance weights to different neighbors, and outputs are fused through a linear transformation. Edge features are updated jointly with node hidden states at each block.
 
-![Sequence Recovery Performance](images/fig2_recovery.png)
-**Figure 2**: Sequence recovery rate of zPolaron compared with other methods.
-
 ---
 
 ## Training and Loss
@@ -247,6 +244,9 @@ zPolaron is evaluated on multiple benchmarks and compared with existing inverse 
 - **Zero-shot fitness prediction**: On ProteinGym (8 enzyme targets), zPolaron achieves the highest Spearman correlation reaching -0.609. On the DAOx multi-substrate benchmark, correlations remain consistently near -0.5. Ablation studies show that any two of the three information sources suffice to surpass all baselines.
 - **Disruptive mutation identification**: AUC of 0.934 (PETase) and 0.995 (ADK) for detecting loss-of-function pocket mutations.
 - **P450 generalization**: The pretrained model maintains competitive sequence recovery on AlphaFold 3-predicted CYP structures, further improved by lightweight fine-tuning of the output layer.
+
+![Sequence Recovery Performance](images/fig2_recovery.png)
+**Figure 2**: Sequence recovery rate of zPolaron compared with other methods.
 
 ![Zero-shot Scoring Correlation](images/fig3_fitness_score.png)
 **Figure 3**: Zero-shot scoring performance of zPolaron compared with other inverse folding models.
