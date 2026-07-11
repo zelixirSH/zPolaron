@@ -250,12 +250,15 @@ zPolaron is evaluated on multiple benchmarks and compared with existing inverse 
 **Figure 2**: Sequence recovery rate of zPolaron compared with other methods.
 
 
+
 ![Zero-shot Scoring Correlation](images/fig3_fitness_score.png)
 **Figure 3**: Zero-shot scoring performance of zPolaron compared with other inverse folding models.
 
 
+
 ![Pocket Mutation](images/fig4_pocket_mutation.png)
 **Figure 4**: Performance on disruptive binding-pocket mutation benchmarks.
+
 
 ---
 
