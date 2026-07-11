@@ -245,13 +245,16 @@ zPolaron is evaluated on multiple benchmarks and compared with existing inverse 
 - **Disruptive mutation identification**: AUC of 0.934 (PETase) and 0.995 (ADK) for detecting loss-of-function pocket mutations.
 - **P450 generalization**: The pretrained model maintains competitive sequence recovery on AlphaFold 3-predicted CYP structures, further improved by lightweight fine-tuning of the output layer.
 
+
 ![Sequence Recovery Performance](images/fig2_recovery.png)
 **Figure 2**: Sequence recovery rate of zPolaron compared with other methods.
+
 
 ![Zero-shot Scoring Correlation](images/fig3_fitness_score.png)
 **Figure 3**: Zero-shot scoring performance of zPolaron compared with other inverse folding models.
 
-![Zero-shot Scoring Correlation Thermal Mutation](images/fig4_fitness_thermal_stability_pocket_mutation.png)
+
+![Pocket Mutation](images/fig4_pocket_mutation.png)
 **Figure 4**: Performance on disruptive binding-pocket mutation benchmarks.
 
 ---
