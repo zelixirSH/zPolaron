@@ -94,18 +94,53 @@ def seq_idx_to_residue(pred_seq_idx):
 def get_per_residue_esm_embedding(esm_model, batch_converter, protein_sequence, device=None):
     if device is None:
         device = torch.device('cpu')
-    
+
     data = [("protein", protein_sequence)]
     batch_labels, batch_strs, batch_tokens = batch_converter(data)
     batch_tokens = batch_tokens.to(device)
-    
+
     with torch.no_grad():
         results = esm_model(batch_tokens, repr_layers=[esm_model.num_layers], return_contacts=False)
-    
+
     token_representations = results["representations"][esm_model.num_layers][0]
-    residue_embeddings = token_representations[1:-1]  # 去掉首尾特殊标记
+    residue_embeddings = token_representations[1:-1]
 
     if device.type == 'cuda':
         residue_embeddings = residue_embeddings.cpu()
-    
+
     return residue_embeddings
+
+
+def get_esm_embedding_with_gap_split(esm_model, batch_converter, chain_sequence,
+                                     chain_res_nums, device, gap_threshold=5):
+    
+    if len(chain_res_nums) != len(chain_sequence):
+        return get_per_residue_esm_embedding(
+            esm_model, batch_converter, chain_sequence, device
+        )
+
+    res_nums_int = [int(r) for r in chain_res_nums]
+    seq_len = len(chain_res_nums)
+
+    splits = [0]
+    for i in range(1, seq_len):
+        if res_nums_int[i] - res_nums_int[i - 1] >= gap_threshold:
+            splits.append(i)
+    splits.append(seq_len)
+
+    if len(splits) <= 2:
+        return get_per_residue_esm_embedding(
+            esm_model, batch_converter, chain_sequence, device
+        )
+
+    segment_embeddings = []
+    for j in range(len(splits) - 1):
+        start = splits[j]
+        end = splits[j + 1]
+        segment_seq = chain_sequence[start:end]
+        seg_emb = get_per_residue_esm_embedding(
+            esm_model, batch_converter, segment_seq, device
+        )
+        segment_embeddings.append(seg_emb)
+
+    return torch.cat(segment_embeddings, dim=0)
