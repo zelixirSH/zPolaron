@@ -94,7 +94,7 @@ For zero-shot scoring evaluation, datasets were assembled from multiple sources:
 The model uses a **heterogeneous graph neural network** built with PyTorch Geometric, containing the following node and edge types:
 
 | Component | Type |
-|-----------|------|-------------|
+|-----------|------|
 | **Nodes** | Protein residue nodes |
 | | Ligand atom nodes |
 | **Edges** | Residue-residue (peptide bond) |
