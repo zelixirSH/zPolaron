@@ -59,10 +59,10 @@ To integrate these three sources of information within a unified framework, zPol
 
 ### Training Set (LigandMPNN Complex Dataset)
 
-The training dataset originates from the protein-ligand complex dataset released by the **LigandMPNN** study. This dataset contains protein-ligand complexes extracted from high-resolution crystal structures.
+The training and validation dataset originates from the protein-ligand complex dataset released by the **LigandMPNN** study. This dataset contains protein-ligand complexes extracted from high-resolution crystal structures.
 
 - **Training set**: 62,908 samples
-- **Validation set**: 3,515 samples (from LigandMPNN's validation split)
+- **Validation set**: 3,515 samples
 - **Test set**: 249 PDB structures published between 2023 and 2025, collected independently. MMseqs2 was used to ensure sequence similarity between test and training data is strictly below 40%.
 
 During data processing, random masking of protein sequences (35% masking ratio) simulates the inverse folding task: given the structure and partial sequence information, the model predicts the original identities of masked residues.
@@ -93,16 +93,16 @@ For zero-shot scoring evaluation, datasets were assembled from multiple sources:
 
 The model uses a **heterogeneous graph neural network** built with PyTorch Geometric, containing the following node and edge types:
 
-| Component | Type | Description |
+| Component | Type |
 |-----------|------|-------------|
-| **Nodes** | Protein residue nodes | Each amino acid in the structure |
-| | Ligand atom nodes | Each atom in the small molecule |
-| **Edges** | Residue-residue (peptide bond) | Sequential connectivity along the backbone |
-| | Residue-residue (geometric) | Spatial proximity based on Cα-Cα distances |
-| | Residue-residue (interaction) | Physicochemical interaction contacts |
-| | Residue-ligand (geometric) | Spatial distance between residue Cα and ligand atoms |
-| | Residue-ligand (interaction) | Physicochemical interactions between residue and ligand |
-| | Ligand-ligand (covalent) | Intramolecular chemical bonds within the ligand |
+| **Nodes** | Protein residue nodes |
+| | Ligand atom nodes |
+| **Edges** | Residue-residue (peptide bond) |
+| | Residue-residue (geometric) |
+| | Residue-residue (interaction) |
+| | Residue-ligand (geometric) |
+| | Residue-ligand (interaction) |
+| | Ligand-ligand (covalent) |
 
 ### Node Features
 
@@ -118,21 +118,7 @@ The model uses a **heterogeneous graph neural network** built with PyTorch Geome
 
 **Residue-residue interaction edges** (13 types):
 
-| Interaction Type | Description |
-|-----------------|-------------|
-| Hydrophobic (aliphatic-aromatic) | Non-polar side chain contacts |
-| Hydrophobic (aliphatic-aliphatic) | Non-polar side chain contacts |
-| Hydrophobic (sulfur-aromatic) | Sulfur-aromatic contacts |
-| Hydrogen bond (OH...O) | Hydroxyl-oxygen hydrogen bonds |
-| Hydrogen bond (NH...O) | Amide-oxygen hydrogen bonds |
-| Hydrogen bond (NH...N) | Amide-nitrogen hydrogen bonds |
-| π-π stacking (edge-to-face) | Aromatic ring stacking |
-| π-π stacking (face-to-face) | Aromatic ring stacking |
-| Weak hydrogen bond (CH_aro...O) | Aromatic C-H...O type |
-| Weak hydrogen bond (CH_ali...O) | Aliphatic C-H...O type |
-| Salt bridge | Electrostatic N⁺...O⁻ interaction |
-| Cation-π | Cation-aromatic interaction |
-| Disulfide bond | Cysteine-cysteine covalent bond |
+Hydrophobic (aliphatic-aromatic), Hydrophobic (aliphatic-aliphatic), Hydrophobic (sulfur-aromatic), Hydrogen bond (OH...O), Hydrogen bond (NH...O), Hydrogen bond (NH...N), π-π stacking (edge-to-face), π-π stacking (face-to-face), Weak hydrogen bond (CH_aro...O), Weak hydrogen bond (CH_ali...O), Salt bridge, Cation-π, Disulfide bond
 
 **Protein-ligand interaction edges** (19 types):
 
